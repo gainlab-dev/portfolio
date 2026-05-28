@@ -25,13 +25,13 @@ export default function FloatingDock() {
   ];
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] max-w-[95vw]">
       {/* SVG Liquid Refraction Filter */}
       <GlassFilter />
 
-      {/* Mobile Dock (Compact, Responsive, Liquid Glass & Tap Float) */}
-      <GlassEffect
-        className="flex sm:hidden h-[38px] min-[375px]:h-11 items-center rounded-full px-2.5 min-[375px]:px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+      {/* Mobile Dock (Compact, Responsive, Glass & Tap Float) */}
+      <div
+        className="flex sm:hidden h-[38px] min-[375px]:h-11 items-center rounded-full px-2.5 min-[375px]:px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] bg-black/60 backdrop-blur-lg border border-white/10"
       >
         <div className="flex items-center gap-1 min-[375px]:gap-1.5">
           {items.map((item) => (
@@ -58,7 +58,7 @@ export default function FloatingDock() {
             </motion.a>
           ))}
         </div>
-      </GlassEffect>
+      </div>
 
       {/* Desktop Dock (Interactive Magnification & Liquid Glass) */}
       <GlassEffect
