@@ -9,6 +9,7 @@ import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import CustomCursor from "@/components/CustomCursor";
 import FloatingDock from "@/components/FloatingDock";
+import FlowArt, { FlowSection } from "@/components/ui/story-scroll";
 import { playScrollTick } from "@/utils/audio";
 
 export default function Home() {
@@ -83,22 +84,26 @@ export default function Home() {
       {/* Premium custom mouse interaction cursor */}
       <CustomCursor />
 
-      {/* Hero Section */}
-      <Hero />
+      <FlowArt aria-label="Portfolio sections">
+        {/* Landing / Hero Section (contains Navbar built-in) */}
+        <FlowSection aria-label="Hero">
+          <Hero />
+        </FlowSection>
 
-      {/* About Section */}
-      <About />
+        {/* About Section */}
+        <FlowSection aria-label="About me">
+          <About />
+        </FlowSection>
 
-      {/* Services Section */}
-      <Services />
+        {/* Services Section */}
+        <FlowSection aria-label="Services">
+          <Services />
+        </FlowSection>
+      </FlowArt>
 
-      {/* Projects Section */}
+      {/* Projects, Experience & Contact are rendered outside FlowArt to scroll normally in document flow */}
       <Projects />
-
-      {/* Experience Section */}
       <Experience />
-
-      {/* Contact Section */}
       <Contact />
 
       {/* MacOS Magnifying Floating Navigation Dock */}
