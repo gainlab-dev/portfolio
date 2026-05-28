@@ -32,68 +32,72 @@ export default function FloatingDock() {
   if (!mounted) return null;
 
   return (
-    <div 
-      className="fixed bottom-20 sm:bottom-8 left-1/2 z-[9999] max-w-[95vw] w-max pointer-events-none"
-      style={{
-        transform: "translate3d(-50%, 0, 0)",
-        WebkitTransform: "translate3d(-50%, 0, 0)",
-      }}
-    >
-      {/* SVG Liquid Refraction Filter */}
+    <>
+      {/* SVG Liquid Refraction Filter — rendered once at page level */}
       <GlassFilter />
 
-      {/* Mobile Dock (Compact, Responsive, Liquid Glass & Tap Float) */}
-      <GlassEffect
-        className="flex sm:hidden h-12 items-center rounded-full px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
+      {/* ─── Mobile Dock ─── */}
+      <div
+        className="fixed inset-x-0 bottom-6 z-[9999] flex justify-center sm:hidden"
+        style={{ transform: "translate3d(0,0,0)" }}
       >
-        <div className="flex items-center gap-1.5">
-          {items.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.href}
-              aria-label={item.label}
-              whileTap={{
-                y: -4,
-                scale: 1.12,
-                backgroundColor: "rgba(255, 255, 255, 0.12)",
-                borderColor: "rgba(255, 255, 255, 0.22)",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 10,
-              }}
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
-            >
-              {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-                className: "w-4.5 h-4.5 shrink-0",
-              })}
-            </motion.a>
-          ))}
-        </div>
-      </GlassEffect>
-
-      {/* Desktop Dock (Interactive Magnification & Liquid Glass) */}
-      <GlassEffect
-        className="hidden sm:flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
-      >
-        <motion.div
-          onMouseMove={(e) => mouseX.set(e.clientX)}
-          onMouseLeave={() => mouseX.set(Infinity)}
-          className="flex items-end gap-3.5"
+        <GlassEffect
+          className="flex h-12 items-center rounded-full px-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
         >
-          {items.map((item) => (
-            <DockIcon
-              key={item.label}
-              mouseX={mouseX}
-              icon={item.icon}
-              href={item.href}
-              label={item.label}
-            />
-          ))}
-        </motion.div>
-      </GlassEffect>
-    </div>
+          <div className="flex items-center gap-1">
+            {items.map((item) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                aria-label={item.label}
+                whileTap={{
+                  y: -4,
+                  scale: 1.12,
+                  backgroundColor: "rgba(255, 255, 255, 0.12)",
+                  borderColor: "rgba(255, 255, 255, 0.22)",
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10,
+                }}
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+              >
+                {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+                  className: "w-[18px] h-[18px] shrink-0",
+                })}
+              </motion.a>
+            ))}
+          </div>
+        </GlassEffect>
+      </div>
+
+      {/* ─── Desktop Dock ─── */}
+      <div
+        className="fixed inset-x-0 bottom-6 z-[9999] hidden sm:flex justify-center"
+        style={{ transform: "translate3d(0,0,0)" }}
+      >
+        <GlassEffect
+          className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+        >
+          <motion.div
+            onMouseMove={(e) => mouseX.set(e.clientX)}
+            onMouseLeave={() => mouseX.set(Infinity)}
+            className="flex items-end gap-3.5"
+          >
+            {items.map((item) => (
+              <DockIcon
+                key={item.label}
+                mouseX={mouseX}
+                icon={item.icon}
+                href={item.href}
+                label={item.label}
+              />
+            ))}
+          </motion.div>
+        </GlassEffect>
+      </div>
+    </>
   );
 }
 
