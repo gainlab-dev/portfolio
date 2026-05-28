@@ -56,14 +56,14 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
   return (
     <div
       ref={cardRef}
-      className="sticky h-[85vh] w-full"
+      className="sticky h-auto sm:h-[85vh] w-full"
       style={{
         top: `${96 + index * 28}px`, // Stack offset top positions
       }}
     >
       <motion.article
         style={{ scale }}
-        className="origin-top mx-auto h-full w-full flex flex-col gap-4 sm:gap-6 md:gap-8 rounded-[28px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8"
+        className="origin-top mx-auto h-auto sm:h-full w-full flex flex-col gap-4 sm:gap-6 md:gap-8 rounded-[28px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8"
       >
         {/* Card Header Info */}
         <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-4 sm:gap-6">
