@@ -37,7 +37,7 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
       style={glassStyle}
     >
       {/* Distorted Backdrop Filter Layer (Wrapped in an exact bounds clipping wrapper) */}
-      <div className="absolute inset-0 z-0 overflow-hidden rounded-inherit">
+      <div className="absolute inset-0 z-0 overflow-hidden" style={{ borderRadius: "inherit" }}>
         <div
           className="absolute"
           style={{
@@ -54,8 +54,9 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
 
       {/* Glass Base & Border Highlight Layer */}
       <div
-        className="absolute inset-0 z-10 rounded-inherit overflow-hidden"
+        className="absolute inset-0 z-10 overflow-hidden"
         style={{
+          borderRadius: "inherit",
           background: "rgba(255, 255, 255, 0.08)",
           boxShadow:
             "inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.35), inset -1px -1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.2)",
