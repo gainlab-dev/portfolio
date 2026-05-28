@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, cloneElement, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Home, User, Code2, Briefcase, History, Mail } from "lucide-react";
 import { GlassEffect, GlassFilter } from "./ui/liquid-glass";
@@ -31,15 +32,19 @@ export default function FloatingDock() {
 
   if (!mounted) return null;
 
-  return (
+  const dock = (
     <>
-      {/* SVG Liquid Refraction Filter — rendered once at page level */}
+      {/* SVG Liquid Refraction Filter */}
       <GlassFilter />
 
       {/* ─── Mobile Dock ─── */}
       <div
-        className="fixed inset-x-0 bottom-6 z-[9999] flex justify-center sm:hidden"
-        style={{ transform: "translate3d(0,0,0)" }}
+        className="fixed inset-x-0 z-[9999] flex justify-center sm:hidden"
+        style={{
+          bottom: "calc(24px + env(safe-area-inset-bottom, 0px))",
+          transform: "translate3d(0,0,0)",
+          WebkitTransform: "translate3d(0,0,0)",
+        }}
       >
         <GlassEffect
           className="flex h-12 items-center rounded-full px-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
@@ -75,7 +80,10 @@ export default function FloatingDock() {
       {/* ─── Desktop Dock ─── */}
       <div
         className="fixed inset-x-0 bottom-6 z-[9999] hidden sm:flex justify-center"
-        style={{ transform: "translate3d(0,0,0)" }}
+        style={{
+          transform: "translate3d(0,0,0)",
+          WebkitTransform: "translate3d(0,0,0)",
+        }}
       >
         <GlassEffect
           className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
@@ -99,6 +107,10 @@ export default function FloatingDock() {
       </div>
     </>
   );
+
+  // Render via portal directly on document.body to escape all
+  // GSAP pin-spacer stacking contexts and overflow:clip containers
+  return createPortal(dock, document.body);
 }
 
 function DockIcon({ mouseX, icon, href, label }: DockIconProps) {
