@@ -64,7 +64,17 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
       />
 
       {/* Content */}
-      <div className="relative z-30">{children}</div>
+      <div
+        className="relative z-30 w-full h-full flex"
+        style={{
+          alignItems: "inherit",
+          justifyContent: "inherit",
+          flexDirection: "inherit",
+          borderRadius: "inherit",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 

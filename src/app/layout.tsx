@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
+import "./tw-animate.css";
 import "./globals.css";
 
 const kanit = Kanit({

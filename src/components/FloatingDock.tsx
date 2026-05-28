@@ -31,31 +31,33 @@ export default function FloatingDock() {
 
       {/* Mobile Dock (Compact, Responsive, Liquid Glass & Tap Float) */}
       <GlassEffect
-        className="flex sm:hidden h-11 items-center gap-1.5 rounded-full px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+        className="flex sm:hidden h-11 items-center rounded-full px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
       >
-        {items.map((item) => (
-          <motion.a
-            key={item.label}
-            href={item.href}
-            aria-label={item.label}
-            whileTap={{
-              y: -6,
-              scale: 1.15,
-              backgroundColor: "rgba(255, 255, 255, 0.12)",
-              borderColor: "rgba(255, 255, 255, 0.22)",
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 10,
-            }}
-            className="flex h-7.5 w-7.5 min-[375px]:h-8 min-[375px]:w-8 items-center justify-center rounded-lg bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
-          >
-            {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-              className: "w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
-            })}
-          </motion.a>
-        ))}
+        <div className="flex items-center gap-1.5">
+          {items.map((item) => (
+            <motion.a
+              key={item.label}
+              href={item.href}
+              aria-label={item.label}
+              whileTap={{
+                y: -6,
+                scale: 1.15,
+                backgroundColor: "rgba(255, 255, 255, 0.12)",
+                borderColor: "rgba(255, 255, 255, 0.22)",
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
+              className="flex h-[30px] w-[30px] min-[375px]:h-8 min-[375px]:w-8 items-center justify-center rounded-lg bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+            >
+              {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+                className: "w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
+              })}
+            </motion.a>
+          ))}
+        </div>
       </GlassEffect>
 
       {/* Desktop Dock (Interactive Magnification & Liquid Glass) */}
