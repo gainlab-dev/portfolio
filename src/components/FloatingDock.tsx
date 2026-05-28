@@ -14,17 +14,10 @@ interface DockIconProps {
 
 export default function FloatingDock() {
   const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const mouseX = useMotionValue(Infinity);
 
   useEffect(() => {
     setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const items = [
@@ -46,62 +39,60 @@ export default function FloatingDock() {
         WebkitTransform: "translate3d(0, 0, 0)",
       }}
     >
-      {/* SVG Liquid Refraction Filter (Desktop only) */}
-      {!isMobile && <GlassFilter />}
+      {/* SVG Liquid Refraction Filter */}
+      <GlassFilter />
 
-      {isMobile ? (
-        /* Mobile Dock (Compact, Responsive, Premium Glass & Tap Float) */
-        <div
-          className="flex h-[38px] min-[375px]:h-11 items-center rounded-full px-3 min-[375px]:px-4.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] bg-[#0C0C0C]/85 backdrop-blur-xl border border-white/10 pointer-events-auto"
-        >
-          <div className="flex items-center gap-1.5 min-[375px]:gap-2">
-            {items.map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                aria-label={item.label}
-                whileTap={{
-                  y: -4,
-                  scale: 1.1,
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderColor: "rgba(255, 255, 255, 0.2)",
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 10,
-                }}
-                className="flex h-7 w-7 min-[375px]:h-8.5 min-[375px]:w-8.5 items-center justify-center rounded-full bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
-              >
-                {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-                  className: "w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
-                })}
-              </motion.a>
-            ))}
-          </div>
+      {/* Mobile Dock (Compact, Responsive, Liquid Glass & Tap Float) */}
+      <GlassEffect
+        className="flex sm:hidden h-12 items-center rounded-full px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
+      >
+        <div className="flex items-center gap-1.5">
+          {items.map((item) => (
+            <motion.a
+              key={item.label}
+              href={item.href}
+              aria-label={item.label}
+              whileTap={{
+                y: -4,
+                scale: 1.12,
+                backgroundColor: "rgba(255, 255, 255, 0.12)",
+                borderColor: "rgba(255, 255, 255, 0.22)",
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+            >
+              {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+                className: "w-4.5 h-4.5 shrink-0",
+              })}
+            </motion.a>
+          ))}
         </div>
-      ) : (
-        /* Desktop Dock (Interactive Magnification & Liquid Glass) */
-        <GlassEffect
-          className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
+      </GlassEffect>
+
+      {/* Desktop Dock (Interactive Magnification & Liquid Glass) */}
+      <GlassEffect
+        className="hidden sm:flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
+      >
+        <motion.div
+          onMouseMove={(e) => mouseX.set(e.clientX)}
+          onMouseLeave={() => mouseX.set(Infinity)}
+          className="flex items-end gap-3.5"
         >
-          <motion.div
-            onMouseMove={(e) => mouseX.set(e.clientX)}
-            onMouseLeave={() => mouseX.set(Infinity)}
-            className="flex items-end gap-3.5"
-          >
-            {items.map((item) => (
-              <DockIcon
-                key={item.label}
-                mouseX={mouseX}
-                icon={item.icon}
-                href={item.href}
-                label={item.label}
-              />
-            ))}
-          </motion.div>
-        </GlassEffect>
-      )}
+          {items.map((item) => (
+            <DockIcon
+              key={item.label}
+              mouseX={mouseX}
+              icon={item.icon}
+              href={item.href}
+              label={item.label}
+            />
+          ))}
+        </motion.div>
+      </GlassEffect>
     </div>
   );
 }
