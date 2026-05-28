@@ -39,36 +39,42 @@ export default function FloatingDock() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] max-w-[95vw] w-max">
+    <div 
+      className="fixed bottom-8 left-4 right-4 z-[9999] flex justify-center pointer-events-none"
+      style={{
+        transform: "translate3d(0, 0, 0)",
+        WebkitTransform: "translate3d(0, 0, 0)",
+      }}
+    >
       {/* SVG Liquid Refraction Filter (Desktop only) */}
       {!isMobile && <GlassFilter />}
 
       {isMobile ? (
-        /* Mobile Dock (Compact, Responsive, Glass & Tap Float) */
+        /* Mobile Dock (Compact, Responsive, Premium Glass & Tap Float) */
         <div
-          className="flex h-[38px] min-[375px]:h-11 items-center rounded-full px-2.5 min-[375px]:px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] bg-black/60 backdrop-blur-lg border border-white/10"
+          className="flex h-[38px] min-[375px]:h-11 items-center rounded-full px-3 min-[375px]:px-4.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] bg-[#0C0C0C]/85 backdrop-blur-xl border border-white/10 pointer-events-auto"
         >
-          <div className="flex items-center gap-1 min-[375px]:gap-1.5">
+          <div className="flex items-center gap-1.5 min-[375px]:gap-2">
             {items.map((item) => (
               <motion.a
                 key={item.label}
                 href={item.href}
                 aria-label={item.label}
                 whileTap={{
-                  y: -5,
-                  scale: 1.12,
-                  backgroundColor: "rgba(255, 255, 255, 0.12)",
-                  borderColor: "rgba(255, 255, 255, 0.22)",
+                  y: -4,
+                  scale: 1.1,
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  borderColor: "rgba(255, 255, 255, 0.2)",
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 400,
                   damping: 10,
                 }}
-                className="flex h-[26px] w-[26px] min-[375px]:h-8 min-[375px]:w-8 items-center justify-center rounded-lg bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+                className="flex h-7 w-7 min-[375px]:h-8.5 min-[375px]:w-8.5 items-center justify-center rounded-full bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
               >
                 {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-                  className: "w-3 h-3 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
+                  className: "w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
                 })}
               </motion.a>
             ))}
@@ -77,7 +83,7 @@ export default function FloatingDock() {
       ) : (
         /* Desktop Dock (Interactive Magnification & Liquid Glass) */
         <GlassEffect
-          className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+          className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%] pointer-events-auto"
         >
           <motion.div
             onMouseMove={(e) => mouseX.set(e.clientX)}
