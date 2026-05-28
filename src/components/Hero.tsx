@@ -164,13 +164,24 @@ export default function Hero() {
               ))}
             </ul>
           </nav>
-          <a
-            href="#contact"
-            className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 sm:px-5 sm:py-2.5 text-[9px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
-          >
-            <span className="hidden sm:inline">EMAIL ME</span>
-            <span className="sm:hidden">EMAIL</span>
-          </a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 sm:px-5 sm:py-2.5 text-[9px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
+            >
+              <span className="hidden sm:inline">EMAIL ME</span>
+              <span className="sm:hidden">EMAIL</span>
+            </a>
+            
+            {/* Sound Toggle (Mobile only header placement to avoid bottom dock overlap) */}
+            <button
+              onClick={handleAudioToggle}
+              aria-label={muted ? "Unmute video" : "Mute video"}
+              className="flex sm:hidden h-[30px] w-[30px] items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95 cursor-pointer"
+            >
+              {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+            </button>
+          </div>
         </motion.header>
 
         {/* Left-Aligned Typography */}
@@ -217,8 +228,8 @@ export default function Hero() {
             </a>
           </Reveal>
 
-          {/* Sound Control */}
-          <Reveal delay={1.1} y={20}>
+          {/* Sound Control (Desktop only bottom-right placement) */}
+          <Reveal delay={1.1} y={20} className="hidden sm:block">
             <div className="flex items-center gap-3">
               {showVolumeTip && (
                 <span className="hidden sm:inline text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 animate-pulseFade">
