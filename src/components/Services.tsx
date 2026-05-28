@@ -19,18 +19,24 @@ export default function Services() {
     },
     {
       number: "03",
+      title: "Backend Development",
+      description:
+        "Designing and building robust, secure server-side logic and APIs using Node.js, Express, databases, and authentication systems — ensuring seamless data flow and scale.",
+    },
+    {
+      number: "04",
       title: "GenAI Integration",
       description:
         "Wiring large language models into real products via Gemini, Claude, and OpenAI APIs — from resume reviewers to AI tutors and beyond.",
     },
     {
-      number: "04",
+      number: "05",
       title: "Prompt Engineering & LLM Automation",
       description:
         "Crafting reliable prompts and automation flows that turn LLMs into production-grade tools for content, analysis, and decision support.",
     },
     {
-      number: "05",
+      number: "06",
       title: "Data Analysis & Visualization",
       description:
         "Exploring datasets with Python (Pandas, NumPy, Seaborn) and Power BI — turning raw numbers into clear insights and dashboards stakeholders can act on.",
