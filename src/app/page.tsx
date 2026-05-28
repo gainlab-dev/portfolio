@@ -104,17 +104,11 @@ export default function Home() {
         <FlowSection aria-label="Projects">
           <Projects />
         </FlowSection>
-
-        {/* Experience Section */}
-        <FlowSection aria-label="Experience">
-          <Experience />
-        </FlowSection>
-
-        {/* Contact Section */}
-        <FlowSection aria-label="Contact" style={{ background: '#0C0C0C' }}>
-          <Contact />
-        </FlowSection>
       </FlowArt>
+
+      {/* Experience & Contact are rendered outside FlowArt to scroll normally in document flow */}
+      <Experience />
+      <Contact />
 
       {/* MacOS Magnifying Floating Navigation Dock */}
       <FloatingDock />
