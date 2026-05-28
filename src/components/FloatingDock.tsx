@@ -28,7 +28,7 @@ function MobileDock() {
       id="mobile-dock"
       style={{
         position: "fixed",
-        bottom: 24,
+        bottom: 36,
         left: 0,
         right: 0,
         zIndex: 99999,
