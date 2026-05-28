@@ -31,7 +31,7 @@ export default function FloatingDock() {
 
       {/* Mobile Dock (Compact, Responsive, Liquid Glass & Tap Float) */}
       <GlassEffect
-        className="flex sm:hidden h-11 items-center gap-1.5 rounded-xl px-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+        className="flex sm:hidden h-11 items-center gap-1.5 rounded-full px-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
       >
         {items.map((item) => (
           <motion.a
@@ -50,7 +50,6 @@ export default function FloatingDock() {
               damping: 10,
             }}
             className="flex h-7.5 w-7.5 min-[375px]:h-8 min-[375px]:w-8 items-center justify-center rounded-lg bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
-            style={{ filter: "url(#glass-distortion)" }}
           >
             {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
               className: "w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 shrink-0",
@@ -61,7 +60,7 @@ export default function FloatingDock() {
 
       {/* Desktop Dock (Interactive Magnification & Liquid Glass) */}
       <GlassEffect
-        className="hidden sm:flex h-16 items-end gap-3.5 rounded-2xl px-4 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
+        className="hidden sm:flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
       >
         <motion.div
           onMouseMove={(e) => mouseX.set(e.clientX)}
@@ -109,7 +108,7 @@ function DockIcon({ mouseX, icon, href, label }: DockIconProps) {
     <motion.a
       ref={ref}
       href={href}
-      style={{ width, height, filter: "url(#glass-distortion)" }}
+      style={{ width, height }}
       className="group relative flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.12] hover:border-white/20 transition-all shadow-inner"
     >
       <span className="absolute -top-10 scale-0 rounded bg-zinc-950 border border-white/10 px-2 py-1 text-[10px] font-bold text-white transition-all group-hover:scale-100 whitespace-nowrap shadow-2xl pointer-events-none">

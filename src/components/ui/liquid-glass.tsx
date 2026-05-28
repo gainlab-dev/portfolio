@@ -33,27 +33,32 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
 
   const content = (
     <div
-      className={`relative flex font-semibold overflow-hidden text-black cursor-pointer transition-all duration-700 ${className}`}
+      className={`relative flex font-semibold text-black cursor-pointer transition-all duration-700 ${className}`}
       style={glassStyle}
     >
-      {/* Glass Layers */}
+      {/* Distorted Backdrop Filter Layer (Wrapped in an exact bounds clipping wrapper) */}
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-inherit">
+        <div
+          className="absolute"
+          style={{
+            top: -20,
+            left: -20,
+            right: -20,
+            bottom: -20,
+            backdropFilter: "blur(4px)",
+            filter: "url(#glass-distortion)",
+            isolation: "isolate",
+          }}
+        />
+      </div>
+
+      {/* Glass Base & Border Highlight Layer */}
       <div
-        className="absolute inset-0 z-0 overflow-hidden rounded-inherit rounded-3xl"
+        className="absolute inset-0 z-10 rounded-inherit overflow-hidden"
         style={{
-          backdropFilter: "blur(3px)",
-          filter: "url(#glass-distortion)",
-          isolation: "isolate",
-        }}
-      />
-      <div
-        className="absolute inset-0 z-10 rounded-inherit"
-        style={{ background: "rgba(255, 255, 255, 0.25)" }}
-      />
-      <div
-        className="absolute inset-0 z-20 rounded-inherit rounded-3xl overflow-hidden"
-        style={{
+          background: "rgba(255, 255, 255, 0.08)",
           boxShadow:
-            "inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5)",
+            "inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.35), inset -1px -1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.2)",
         }}
       />
 
@@ -78,9 +83,9 @@ export const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
 }) => (
   <GlassEffect
     href={href}
-    className="rounded-3xl p-3 hover:p-4 hover:rounded-4xl"
+    className="rounded-full p-3 hover:p-4"
   >
-    <div className="flex items-center justify-center gap-2 rounded-3xl p-3 py-0 px-0.5 overflow-hidden">
+    <div className="flex items-center justify-center gap-2 rounded-full p-3 py-0 px-0.5 overflow-hidden">
       {icons.map((icon, index) => (
         <img
           key={index}
@@ -105,7 +110,7 @@ export const GlassButton: React.FC<{ children: React.ReactNode; href?: string }>
 }) => (
   <GlassEffect
     href={href}
-    className="rounded-3xl px-10 py-6 hover:px-11 hover:py-7 hover:rounded-4xl overflow-hidden"
+    className="rounded-full px-10 py-6 hover:px-11 hover:py-7 overflow-hidden"
   >
     <div
       className="transition-all duration-700 hover:scale-95"
@@ -123,10 +128,10 @@ export const GlassFilter: React.FC = () => (
   <svg style={{ display: "none" }}>
     <filter
       id="glass-distortion"
-      x="0%"
-      y="0%"
-      width="100%"
-      height="100%"
+      x="-20%"
+      y="-20%"
+      width="140%"
+      height="140%"
       filterUnits="objectBoundingBox"
     >
       <feTurbulence
@@ -164,7 +169,7 @@ export const GlassFilter: React.FC = () => (
       <feDisplacementMap
         in="SourceGraphic"
         in2="softMap"
-        scale="200"
+        scale="15"
         xChannelSelector="R"
         yChannelSelector="G"
       />
