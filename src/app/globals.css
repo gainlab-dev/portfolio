@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0C0C0C;
+  --foreground: #D7E2EA;
+}
+
+@theme {
+  --font-sans: var(--font-kanit), Arial, Helvetica, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* NOTE: scroll-behavior: smooth removed — conflicts with GSAP ScrollTrigger scrubbing */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: #0C0C0C;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #0C0C0C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f24;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a30;
+}
+
+/* Title gradients */
+.hero-heading {
+  background: linear-gradient(180deg, #646973, #bbccd7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Custom keyframes */
+@keyframes scrollLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulseFade {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-scrollLine {
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+
+.animate-pulseFade {
+  animation: pulseFade 2s ease-in-out infinite;
+}
+
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
