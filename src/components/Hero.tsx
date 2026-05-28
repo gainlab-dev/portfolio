@@ -148,15 +148,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8"
+          className="w-full flex items-center justify-between px-4 sm:px-6 md:px-10 pt-6 md:pt-8"
         >
           <nav>
-            <ul className="flex items-center gap-4 sm:gap-8 md:gap-12">
+            <ul className="flex items-center gap-3 sm:gap-8 md:gap-12">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white/80 transition hover:text-white"
+                    className="text-[9px] min-[375px]:text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] min-[375px]:tracking-[0.2em] text-white/80 transition hover:text-white"
                   >
                     {link.label}
                   </a>
@@ -167,7 +167,7 @@ export default function Hero() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="#contact"
-              className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 sm:px-5 sm:py-2.5 text-[9px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
+              className="inline-flex h-[30px] sm:h-auto items-center justify-center rounded-full border border-white/20 bg-white/10 px-3.5 sm:px-5 sm:py-2.5 text-[9px] sm:text-xs font-medium uppercase tracking-[0.15em] min-[375px]:tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
             >
               <span className="hidden sm:inline">EMAIL ME</span>
               <span className="sm:hidden">EMAIL</span>
