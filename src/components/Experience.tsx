@@ -250,8 +250,8 @@ export default function Experience() {
         {/* Shuffling Stack Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mt-12 sm:mt-16">
           
-          {/* Left Column: Text & Instructions (5 cols) */}
-          <div className="lg:col-span-5 text-center lg:text-left flex flex-col justify-center items-center lg:items-start space-y-6">
+          {/* Left Column: Text & Instructions (5 cols, hidden on mobile) */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col justify-center items-start space-y-6">
             <Reveal y={20} className="w-full">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-[#D7E2EA]/50 mb-2">
                 <span className="h-2 w-2 rounded-full bg-[#b600a8] animate-pulse" />
@@ -266,7 +266,7 @@ export default function Experience() {
             </Reveal>
 
             {/* Drag helper animation */}
-            <Reveal delay={0.2} y={20} className="hidden lg:flex items-center gap-3 text-zinc-500 text-xs tracking-wider uppercase">
+            <Reveal delay={0.2} y={20} className="flex items-center gap-3 text-zinc-500 text-xs tracking-wider uppercase">
               <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 animate-pulse bg-white/5">
                 ←
               </span>
