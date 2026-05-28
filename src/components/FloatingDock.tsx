@@ -33,7 +33,7 @@ export default function FloatingDock() {
 
   return (
     <div 
-      className="fixed bottom-14 sm:bottom-8 left-1/2 z-[9999] max-w-[95vw] w-max pointer-events-none"
+      className="fixed bottom-20 sm:bottom-8 left-1/2 z-[9999] max-w-[95vw] w-max pointer-events-none"
       style={{
         transform: "translate3d(-50%, 0, 0)",
         WebkitTransform: "translate3d(-50%, 0, 0)",
