@@ -94,19 +94,11 @@ export default function Home() {
         <FlowSection aria-label="About me">
           <About />
         </FlowSection>
-
-        {/* Services Section */}
-        <FlowSection aria-label="Services">
-          <Services />
-        </FlowSection>
-
-        {/* Projects Section */}
-        <FlowSection aria-label="Projects">
-          <Projects />
-        </FlowSection>
       </FlowArt>
 
-      {/* Experience & Contact are rendered outside FlowArt to scroll normally in document flow */}
+      {/* Services, Projects, Experience & Contact are rendered outside FlowArt to scroll normally in document flow */}
+      <Services />
+      <Projects />
       <Experience />
       <Contact />
 
