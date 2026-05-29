@@ -24,7 +24,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-screen flex-grow bg-[#0C0C0C] px-5 sm:px-8 md:px-10 pt-24 sm:pt-28 md:pt-32 pb-28 sm:pb-36"
+      className="relative w-full min-h-screen flex-grow bg-[#0C0C0C] px-5 sm:px-8 md:px-10 pt-24 sm:pt-28 md:pt-32 pb-28 sm:pb-36 overflow-hidden"
     >
       {/* Dynamic Scrim Background */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />

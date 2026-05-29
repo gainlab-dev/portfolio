@@ -13,16 +13,16 @@ interface DockIconProps {
   label: string;
 }
 
-function MobileDock() {
-  const items = [
-    { icon: <Home className="w-5 h-5" />, label: "Home", href: "#" },
-    { icon: <User className="w-5 h-5" />, label: "About", href: "#about" },
-    { icon: <Code2 className="w-5 h-5" />, label: "Skills", href: "#skills" },
-    { icon: <Briefcase className="w-5 h-5" />, label: "Projects", href: "#projects" },
-    { icon: <History className="w-5 h-5" />, label: "Experience", href: "#experience" },
-    { icon: <Mail className="w-5 h-5" />, label: "Contact", href: "#contact" },
-  ];
+const NAV_ITEMS = [
+  { icon: <Home className="w-5 h-5" />, label: "Home", href: "#" },
+  { icon: <User className="w-5 h-5" />, label: "About", href: "#about" },
+  { icon: <Code2 className="w-5 h-5" />, label: "Skills", href: "#skills" },
+  { icon: <Briefcase className="w-5 h-5" />, label: "Projects", href: "#projects" },
+  { icon: <History className="w-5 h-5" />, label: "Experience", href: "#experience" },
+  { icon: <Mail className="w-5 h-5" />, label: "Contact", href: "#contact" },
+];
 
+function MobileDock() {
   return (
     <div
       id="mobile-dock"
@@ -40,55 +40,46 @@ function MobileDock() {
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          height: 48,
-          alignItems: "center",
-          borderRadius: 9999,
-          padding: "0 14px",
-          gap: 6,
-          background: "rgba(15, 15, 18, 0.82)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          border: "1px solid rgba(255, 255, 255, 0.12)",
-          boxShadow:
-            "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.2)",
-          pointerEvents: "auto",
-        }}
-      >
-        {items.map((item) => (
-          <motion.a
-            key={item.label}
-            href={item.href}
-            aria-label={item.label}
-            whileTap={{
-              y: -4,
-              scale: 1.12,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 10,
-            }}
-            style={{
-              display: "flex",
-              height: 36,
-              width: 36,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 10,
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.06)",
-              color: "#9ca3af",
-              WebkitTapHighlightColor: "transparent",
-            }}
-          >
-            {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-              className: "w-[18px] h-[18px] shrink-0",
-            })}
-          </motion.a>
-        ))}
+      <GlassFilter />
+      <div style={{ pointerEvents: "auto" }}>
+        <GlassEffect
+          className="flex h-14 items-center rounded-full px-4 animate-moveBackground bg-[length:200%_200%]"
+          style={{
+            boxShadow:
+              "0 8px 32px 0 rgba(0,0,0,0.37), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.2)",
+            backdropFilter: "blur(24px) saturate(180%)",
+            WebkitBackdropFilter: "blur(24px) saturate(180%)",
+            border: "1px solid rgba(255,255,255,0.18)",
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%)",
+          }}
+        >
+          <div className="flex items-center gap-1.5">
+            {NAV_ITEMS.map((item) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                aria-label={item.label}
+                whileTap={{
+                  y: -4,
+                  scale: 1.12,
+                  backgroundColor: "rgba(255, 255, 255, 0.12)",
+                  borderColor: "rgba(255, 255, 255, 0.22)",
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10,
+                }}
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+              >
+                {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+                  className: "w-[20px] h-[20px] shrink-0",
+                })}
+              </motion.a>
+            ))}
+          </div>
+        </GlassEffect>
       </div>
     </div>
   );
@@ -96,15 +87,6 @@ function MobileDock() {
 
 function DesktopDock() {
   const mouseX = useMotionValue(Infinity);
-
-  const items = [
-    { icon: <Home className="w-5 h-5" />, label: "Home", href: "#" },
-    { icon: <User className="w-5 h-5" />, label: "About", href: "#about" },
-    { icon: <Code2 className="w-5 h-5" />, label: "Skills", href: "#skills" },
-    { icon: <Briefcase className="w-5 h-5" />, label: "Projects", href: "#projects" },
-    { icon: <History className="w-5 h-5" />, label: "Experience", href: "#experience" },
-    { icon: <Mail className="w-5 h-5" />, label: "Contact", href: "#contact" },
-  ];
 
   return (
     <div
@@ -118,7 +100,7 @@ function DesktopDock() {
           onMouseLeave={() => mouseX.set(Infinity)}
           className="flex items-end gap-3.5"
         >
-          {items.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <DockIcon
               key={item.label}
               mouseX={mouseX}
@@ -147,8 +129,8 @@ export default function FloatingDock() {
 
   if (!mounted) return null;
 
-  // Mobile: render via portal to document.body to escape GSAP stacking contexts
-  // Desktop: render in-place (no GSAP stacking issues on desktop)
+  // Mobile: portal to body to escape GSAP stacking contexts
+  // Desktop: render in-place
   if (isMobile) {
     return createPortal(<MobileDock />, document.body);
   }
