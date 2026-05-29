@@ -81,27 +81,29 @@ function DesktopDock() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-6 z-[99999] flex justify-center"
+      className="fixed inset-x-0 bottom-6 z-[99999] flex justify-center pointer-events-none"
       style={{ transform: "translate3d(0,0,0)" }}
     >
       <GlassFilter />
-      <GlassEffect className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]">
-        <motion.div
-          onMouseMove={(e) => mouseX.set(e.clientX)}
-          onMouseLeave={() => mouseX.set(Infinity)}
-          className="flex items-end gap-3.5"
-        >
-          {NAV_ITEMS.map((item) => (
-            <DockIcon
-              key={item.label}
-              mouseX={mouseX}
-              icon={item.icon}
-              href={item.href}
-              label={item.label}
-            />
-          ))}
-        </motion.div>
-      </GlassEffect>
+      <div className="pointer-events-auto">
+        <GlassEffect className="flex h-16 items-end gap-3.5 rounded-full px-6 pb-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]">
+          <motion.div
+            onMouseMove={(e) => mouseX.set(e.clientX)}
+            onMouseLeave={() => mouseX.set(Infinity)}
+            className="flex items-end gap-3.5"
+          >
+            {NAV_ITEMS.map((item) => (
+              <DockIcon
+                key={item.label}
+                mouseX={mouseX}
+                icon={item.icon}
+                href={item.href}
+                label={item.label}
+              />
+            ))}
+          </motion.div>
+        </GlassEffect>
+      </div>
     </div>
   );
 }
