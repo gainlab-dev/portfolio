@@ -28,7 +28,7 @@ function MobileDock() {
       id="mobile-dock"
       style={{
         position: "fixed",
-        bottom: 36,
+        bottom: 18,
         left: 0,
         right: 0,
         zIndex: 99999,
@@ -43,18 +43,9 @@ function MobileDock() {
       <GlassFilter />
       <div style={{ pointerEvents: "auto" }}>
         <GlassEffect
-          className="flex h-14 items-center rounded-full px-4 animate-moveBackground bg-[length:200%_200%]"
-          style={{
-            boxShadow:
-              "0 8px 32px 0 rgba(0,0,0,0.37), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.2)",
-            backdropFilter: "blur(24px) saturate(180%)",
-            WebkitBackdropFilter: "blur(24px) saturate(180%)",
-            border: "1px solid rgba(255,255,255,0.18)",
-            background:
-              "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%)",
-          }}
+          className="flex h-11 items-center rounded-full px-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] animate-moveBackground bg-[length:200%_200%]"
         >
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-0.5">
             {NAV_ITEMS.map((item) => (
               <motion.a
                 key={item.label}
@@ -71,10 +62,10 @@ function MobileDock() {
                   stiffness: 400,
                   damping: 10,
                 }}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/5 text-zinc-400 active:text-white transition-colors duration-150"
+                className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 active:text-white transition-colors duration-150"
               >
                 {cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-                  className: "w-[20px] h-[20px] shrink-0",
+                  className: "w-4 h-4 shrink-0",
                 })}
               </motion.a>
             ))}

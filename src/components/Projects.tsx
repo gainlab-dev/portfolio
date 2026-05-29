@@ -212,7 +212,7 @@ export default function Projects() {
       </Reveal>
 
       {/* Cards List container */}
-      <div ref={containerRef} className="mx-auto max-w-5xl space-y-24">
+      <div ref={containerRef} className="mx-auto max-w-5xl space-y-10">
         {projectsData.map((project, idx) => (
           <ProjectCard
             key={project.number}
