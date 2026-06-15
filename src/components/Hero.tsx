@@ -86,6 +86,72 @@ export default function Hero() {
     (window as any).portfolioMuted = muted;
   }, [muted]);
 
+  // Auto-enable sound. Browsers block autoplaying audio until the user
+  // interacts with the page, so we (1) try to play with sound immediately
+  // (this succeeds for returning visitors whose browser allows it) and
+  // (2) otherwise unmute on the visitor's first interaction — tap, click,
+  // key press or touch. The video keeps autoplaying muted until then.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let enabled = false;
+
+    const enableSound = () => {
+      if (enabled) return;
+      const v = videoRef.current;
+      if (!v) return;
+      enabled = true;
+      (window as any).portfolioMuted = false;
+      v.muted = false;
+      v.play()?.catch(() => {});
+      setMuted(false);
+      setShowVolumeTip(false);
+      unlockAudio();
+      window.dispatchEvent(
+        new CustomEvent("portfolioMuteToggle", { detail: false })
+      );
+      removeGestureListeners();
+    };
+
+    const armGestureListeners = () => {
+      window.addEventListener("pointerdown", enableSound, { once: true });
+      window.addEventListener("keydown", enableSound, { once: true });
+      window.addEventListener("touchstart", enableSound, { once: true });
+      window.addEventListener("click", enableSound, { once: true });
+    };
+
+    const removeGestureListeners = () => {
+      window.removeEventListener("pointerdown", enableSound);
+      window.removeEventListener("keydown", enableSound);
+      window.removeEventListener("touchstart", enableSound);
+      window.removeEventListener("click", enableSound);
+    };
+
+    // (1) Best-effort: attempt to start with sound right away.
+    (window as any).portfolioMuted = false;
+    video.muted = false;
+    const attempt = video.play();
+    if (attempt && typeof attempt.then === "function") {
+      attempt
+        .then(() => enableSound())
+        .catch(() => {
+          // (2) Blocked by autoplay policy: fall back to muted autoplay and
+          // unmute on the first user interaction.
+          (window as any).portfolioMuted = true;
+          video.muted = true;
+          video.play()?.catch(() => {});
+          armGestureListeners();
+        });
+    } else {
+      (window as any).portfolioMuted = true;
+      video.muted = true;
+      armGestureListeners();
+    }
+
+    return removeGestureListeners;
+  }, []);
+
   const handleAudioToggle = () => {
     const video = videoRef.current;
     if (video) {
