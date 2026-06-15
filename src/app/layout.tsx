@@ -12,13 +12,55 @@ const kanit = Kanit({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
+// TODO: replace with your live domain once the portfolio is deployed.
+// Used as the base for canonical + Open Graph/Twitter image URLs.
+const siteUrl = "https://usamarehman.dev";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Usama Rehman — Developer & Designer",
-  description: "Usama Rehman — Developer & Designer. UI/UX, web design, front-end development, and GenAI integration.",
+  description:
+    "Usama Rehman — Developer & Designer. UI/UX, front-end & full-stack web development, and GenAI integration.",
+  keywords: [
+    "Usama Rehman",
+    "Developer",
+    "Designer",
+    "Front-end Developer",
+    "Full-Stack Developer",
+    "UI/UX",
+    "GenAI",
+    "React",
+    "Next.js",
+    "Portfolio",
+  ],
+  authors: [{ name: "Usama Rehman" }],
+  creator: "Usama Rehman",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Usama Rehman — Portfolio",
+    title: "Usama Rehman — Developer & Designer",
+    description:
+      "Developer, designer & GenAI integration — building high-performance web apps and immersive interfaces.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Usama Rehman — Developer & Designer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Usama Rehman — Developer & Designer",
+    description:
+      "Developer, designer & GenAI integration — building high-performance web apps and immersive interfaces.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

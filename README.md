@@ -1,8 +1,8 @@
-# Harsh Goyal — Developer & Designer Portfolio
+# Usama Rehman — Developer & Designer Portfolio
 
 A premium, highly interactive portfolio website designed to showcase development experience, projects, skills, and design philosophies. Built with modern, cutting-edge frontend technologies.
 
-Live Demo: [harsh-portfolio-coral.vercel.app](https://harsh-portfolio-coral.vercel.app)
+Live Demo: _coming soon_
 
 ---
 

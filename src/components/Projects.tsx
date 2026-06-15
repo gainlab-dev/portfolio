@@ -109,7 +109,7 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
             >
               <img
                 src={project.col1Image1}
-                alt={`${project.name} preview 1`}
+                alt={`${project.name} website screenshot 1`}
                 className="h-full w-full object-cover"
                 loading="lazy"
                 draggable={false}
@@ -121,7 +121,7 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
             >
               <img
                 src={project.col1Image2}
-                alt={`${project.name} preview 2`}
+                alt={`${project.name} website screenshot 2`}
                 className="h-full w-full object-cover"
                 loading="lazy"
                 draggable={false}
@@ -133,7 +133,7 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
           <div className="overflow-hidden rounded-[20px] sm:rounded-[50px] md:rounded-[60px] min-h-[220px] sm:min-h-0 flex-1 h-[220px] sm:h-auto">
             <img
               src={project.col2Image}
-              alt={`${project.name} preview 3`}
+              alt={`${project.name} website screenshot 3`}
               className="h-full w-full object-cover"
               loading="lazy"
               draggable={false}
@@ -151,6 +151,15 @@ export default function Projects() {
   const projectsData: Project[] = [
     {
       number: "01",
+      category: "Full-Stack · E-Commerce",
+      name: "TryNext",
+      liveUrl: "https://trynext.store",
+      col1Image1: "/trynext-shop.png",
+      col1Image2: "/trynext-product.png",
+      col2Image: "/trynext-home.png",
+    },
+    {
+      number: "02",
       category: "Commercial · Fintech",
       name: "GainLab",
       liveUrl: "https://gainlab.ltd",
@@ -159,7 +168,7 @@ export default function Projects() {
       col2Image: "/gainlab.png",
     },
     {
-      number: "02",
+      number: "03",
       category: "Personal",
       name: "Forge",
       liveUrl: "https://forge-pink-seven.vercel.app/",
@@ -168,7 +177,7 @@ export default function Projects() {
       col2Image: "/Forge2.png",
     },
     {
-      number: "03",
+      number: "04",
       category: "Personal",
       name: "LawLab",
       liveUrl: "https://lawlab-self.vercel.app",
@@ -177,7 +186,7 @@ export default function Projects() {
       col2Image: "/lawlab2.png",
     },
     {
-      number: "04",
+      number: "05",
       category: "Personal · GenAI",
       name: "ResumeIQ",
       liveUrl: "https://resumeiq-harsh.vercel.app/",
@@ -186,7 +195,7 @@ export default function Projects() {
       col2Image: "/resumeiq-score.png",
     },
     {
-      number: "05",
+      number: "06",
       category: "Personal · Design",
       name: "Notch",
       liveUrl: "https://notch-zeta.vercel.app/",
